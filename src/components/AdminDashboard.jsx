@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [submissions, setSubmissions] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [socket, setSocket] = useState(null);
-
+  const nav = useNavigate();
+  const handlenav = (path)=>{
+    nav(path);
+  }
   useEffect(() => {
     const fetchSubmissions = async () => {
       const token = localStorage.getItem('authToken');
@@ -124,6 +128,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
+      <button className=' w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500' onClick={()=>{handlenav('/')}}>Add User</button>
     </div>
   );
 };
